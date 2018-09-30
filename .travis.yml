@@ -1,0 +1,23 @@
+sudo: false # use docker
+dist: trusty
+
+language: python
+
+python:
+  - "2.7"
+  - "3.4"
+  - "3.5"
+  - "3.6"
+
+install: 
+  - make install
+  - pip install flake8
+  
+script: 
+  - make flake8
+  - make ci
+  
+notifications:
+  email:
+    - dpark.ci@gmail.com
+  slack: vcrs:EwEGGxeJTXj75vTJuc4sLQ4S
