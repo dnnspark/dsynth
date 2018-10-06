@@ -19,6 +19,7 @@ def test_multiview_warper(vis=False):
         K = np.linalg.inv(warper.K_invs[0])
 
         W, view_id = warper.match_and_warp((R,t), K, (400,400), alpha=.8, light_setting=None)
+        assert view_id == '0000'
 
 
 
