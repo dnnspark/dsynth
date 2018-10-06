@@ -23,6 +23,8 @@ REQUIRED = [
     'matplotlib',
     'imageio',
     'pyyaml',
+    'opencv-python',
+    'scikit-image',
 ]
 
 # What packages are optional?
