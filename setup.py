@@ -21,6 +21,10 @@ REQUIRES_PYTHON = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"  # 2.7 or >=3.4
 REQUIRED = [
     'numpy',
     'matplotlib',
+    'imageio',
+    'pyyaml',
+    'opencv-python',
+    'scikit-image',
 ]
 
 # What packages are optional?
@@ -79,8 +83,6 @@ sutools.setup(
         'Natural Language :: English',
         # 'License :: OSI Approved :: Apache Software License',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
