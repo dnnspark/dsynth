@@ -98,6 +98,7 @@ class MultiviewWarper():
             normal = R[-1,:] - np.dot(R.T, t)
             N[k] = normalize( normal )
 
+            # all views are defined wrt one 3d model.
             _path_to_obj = view.get('path_to_obj', None)
             if k == 0:
                 path_to_obj = _path_to_obj
