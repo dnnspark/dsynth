@@ -1,5 +1,12 @@
+venv:
+	virtualenv venv -p `which python3.6` 
+
 install:
-	pip install -e .
+	source ./venv/bin/activate; \
+	pip install -e .; \
+
+install_test:
+	pip install -e . && pip install pytest && pip install flake8
 
 ci:
 	pytest
@@ -14,5 +21,6 @@ clean:
 	rm -rf build/
 	rm -rf dist/
 	rm -rf junit-py*.xml
+	rm -rf venv/
 
-.PHONY: install ci clean_install test clean
+.PHONY: venv install install_test ci clean_install clean

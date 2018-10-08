@@ -1,9 +1,9 @@
 '''
-This file implements view_generator interface for t-less dataset.
-  - See multiview_ibr.py for view_generator interface.
-  - See tests/test_multiview_ibr.py for use case.
+This file implements view info generator interface for t-less dataset.
+  - See multiview_warper.py for view_generator interface.
+  - See tests/test_multiview_warper.py for use case.
 
-Masks are generated from image in on-demand basis, using grabcut algorithm with ground truth pose as prior.
+Mask is computed from rgb image and ground truth pose, using grabcut algorithm with ground truth pose as prior.
 Using for-loop, it takes about 1.7s x 1300 = ~40 mins. To speed up this part, 
 it runs on parallel using multiprocessing library of python.
 
@@ -21,13 +21,13 @@ import collections
 import time
 import tempfile
 
-
-ViewInfo = collections.namedtuple('ViewInfo', 'path_to_rgb R t K path_to_mask')
-
 # User must set this part.
 PATH_TO_TLESS_ROOT = '/cluster/storage/dpark/t-less/t-less_v2'
 SENSOR = 'primesense'
 # SENSOR = 'kinect'
+
+# view-specific data; input of generate_and_write_mask() 
+ViewInfo = collections.namedtuple('ViewInfo', 'path_to_rgb R t K path_to_mask')
 
 _gt_file = os.path.join(PATH_TO_TLESS_ROOT, 'train_{}/%02d/gt.yml'.format(SENSOR))
 _info_file = os.path.join(PATH_TO_TLESS_ROOT, 'train_{}/%02d/info.yml'.format(SENSOR))
@@ -45,13 +45,7 @@ grabcut_with_pose_prior_kwargs = {
     'num_iter': 40,
 }
 
-py_version = sys.version_info[0]
-if py_version < 3:
-    file_not_found_error = IOError
-else:
-    file_not_found_error = FileNotFoundError
-
-
+file_not_found_error = FileNotFoundError
 
 def load_yaml_files(obj_id):
     '''
@@ -134,9 +128,10 @@ def generate_and_write_mask(path_to_rgb, R, t, K, path_to_mask, vertices, faces,
 
     return path_to_mask
 
-
-
 def generate_masks(obj_id, num_processes=None, debug=False, overwrite=False):
+    '''
+    Entry point for (parallel) mask generation.
+    '''
 
     vertices, faces, _ = load_3d_model(obj_id)
     _generate_and_write_mask = functools.partial(generate_and_write_mask, vertices=vertices, faces=faces, overwrite=overwrite)
@@ -155,6 +150,9 @@ def generate_masks(obj_id, num_processes=None, debug=False, overwrite=False):
     return paths_to_masks
 
 def generate(obj_id, paths_to_masks=None, debug=False):
+    '''
+    View info generator interface for t-less dataset.
+    '''
 
     _, __, obj_file = load_3d_model(obj_id)
 
@@ -185,5 +183,3 @@ def generate(obj_id, paths_to_masks=None, debug=False):
         }
 
         yield out
-
-

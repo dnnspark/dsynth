@@ -70,12 +70,3 @@ def test_starmap_with_zipped_generators():
     # y = pool.map(func4, zip(g1,g2))
     y = pool.starmap(func4, zip(g1,g2), chunksize=250) # python >= 3.3
     print(y)
-
-
-# if __name__ == '__main__':
-#     test_map_simple()
-#     # test_map_with_nested_function()
-#     # test_map_with_lambda()
-#     test_map_with_partial()
-#     test_map_with_generator()
-#     test_starmap_with_zipped_generators()
