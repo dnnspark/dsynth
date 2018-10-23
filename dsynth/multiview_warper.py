@@ -31,14 +31,27 @@ As input, user must implement a python generator that yields a dict of:
         path to .obj file, the 3d model of object.
         This must be same for all views, if any.
 
-The camera coordinate is assumed to follow this:
+The camera coordinate is assumed to follow standard pinhole camera model:
     https://docs.opencv.org/2.4/modules/calib3d/doc/camera_calibration_and_3d_reconstruction.html
 '''
 
 import numpy as np
 import cv2
+import abc
 from imageio import imread
 from dsynth.util.multiview_util import normalize, warp_from_camera_motion
+
+class ViewDataset(abc.ABC):
+
+    @abc.abstractmethod
+    def __getitem(self, idx):
+        pass
+
+    @abc.abstractmethod
+    def __len__(self):
+        pass
+
+
 
 class MultiviewWarper():
 
