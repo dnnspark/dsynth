@@ -25,6 +25,7 @@ REQUIRED = [
     'pyyaml',
     'opencv-python',
     'scikit-image',
+    'transforms3d',
 ]
 
 # What packages are optional?
