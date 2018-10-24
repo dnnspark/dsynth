@@ -44,7 +44,7 @@ from dsynth.util.multiview_util import normalize, warp_from_camera_motion
 class ViewDataset(abc.ABC):
 
     @abc.abstractmethod
-    def __getitem(self, idx):
+    def __getitem__(self, idx):
         pass
 
     @abc.abstractmethod
