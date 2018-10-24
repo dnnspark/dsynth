@@ -1,14 +1,24 @@
 error:
-	@echo "Please choose one of the following target: venv, install_dev, ci, flake8, clean"
+	@echo "Please choose one of the following target: venv, install_core, install_test, install_tools, dev, ci, flake8, clean"
 	@exit 2
 
 venv:
 	virtualenv venv -p `which python3.6` 
 	ln -s venv/bin/activate activate
 
-install_dev:
+install_core:
 	source ./venv/bin/activate; \
-	pip install -e . && pip install pytest && pip install flake8
+	pip install -e .
+
+install_test:
+	source ./venv/bin/activate; \
+	pip install pytest flake8
+
+install_tools:
+	source ./venv/bin/activate; \
+	pip install seaborn scikit-image imageio
+
+dev: venv install_core install_test install_tools
 
 ci:
 	pytest
