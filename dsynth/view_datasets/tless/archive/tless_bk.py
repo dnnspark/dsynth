@@ -1,6 +1,6 @@
 '''
-This file implements view info generator interface for t-less dataset.
-  - See multiview_warper.py for view_generator interface.
+This file implements ViewDataset interface for t-less dataset (http://cmp.felk.cvut.cz/t-less). 
+  - See multiview_warper.py for ViewDataset interface.
   - See tests/test_multiview_warper.py for use case.
 
 Mask is computed from rgb image and ground truth pose, using grabcut algorithm with ground truth pose as prior.
@@ -97,7 +97,7 @@ def generate_view_info(obj_id, debug):
 
 def generate_and_write_mask(path_to_rgb, R, t, K, path_to_mask, vertices, faces, overwrite):
     '''
-    Shallow wrapper for mask_util.brabcut_with_pose_prior. 
+    Shallow wrapper for mask_util.grabcut_with_pose_prior. 
         - create parent directory, if not exists
         - create mask and save it on thie disk if
             1) it does not already exist, or 

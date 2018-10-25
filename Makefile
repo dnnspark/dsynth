@@ -21,7 +21,7 @@ install_tools:
 dev: venv install_core install_test install_tools
 
 ci:
-	pytest
+	pytest tests --ignore=tests/archive
 
 flake8:
 	flake8 --ignore=E501,F401,E128,E402,E731,F821 pybullet
