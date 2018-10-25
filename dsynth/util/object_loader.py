@@ -1,4 +1,8 @@
-"""Wavefront .obj file loader.
+"""
+(ext) Carbon copy of:
+    https://vhub.vicarious/vicarious/dataset/blob/master/dataset/util/object_loader.py
+
+Wavefront .obj file loader.
 
 Supports basic material and texture properties.
 Vertex colors are not supported.

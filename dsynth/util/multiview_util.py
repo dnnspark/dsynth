@@ -1,7 +1,5 @@
 import numpy as np
 
-normalize = lambda vec: vec / np.linalg.norm(vec)
-
 def _col(vec):
     '''
     Convert to column vector, i.e. (N,1)
