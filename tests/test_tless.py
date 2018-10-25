@@ -2,7 +2,6 @@ from dsynth.view_datasets.tless import TlessMultiviewDataset
 from dsynth import MultiviewWarper
 import numpy as np
 
-
 def test_tless_dataset():
     dataset = TlessMultiviewDataset(obj_id=2, unit_test=True)
     ibr = MultiviewWarper(dataset)
